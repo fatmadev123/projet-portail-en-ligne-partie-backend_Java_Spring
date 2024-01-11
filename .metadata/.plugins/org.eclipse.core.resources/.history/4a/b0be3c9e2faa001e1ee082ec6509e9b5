@@ -1,0 +1,10 @@
+package com.Rental_Project.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class MessagesController {
+	@Autowired
+    private MessagesService messageService;
+}

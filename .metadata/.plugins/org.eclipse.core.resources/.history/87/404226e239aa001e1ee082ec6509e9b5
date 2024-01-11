@@ -1,0 +1,8 @@
+package com.Rental_Project.services;
+
+public class Snippet {
+	public static void main(String[] args) {
+		CustomProperties
+	}
+}
+

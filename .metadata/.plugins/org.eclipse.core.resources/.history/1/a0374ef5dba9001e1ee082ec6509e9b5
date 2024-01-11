@@ -1,0 +1,9 @@
+package com.Rental_Project.models;
+
+
+@Data
+@Entity
+@Table(name = "rentals")
+public class Rentals {
+
+}

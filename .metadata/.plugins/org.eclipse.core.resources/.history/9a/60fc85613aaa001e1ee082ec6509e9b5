@@ -1,0 +1,38 @@
+package com.Rental_Project.repository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.batch.BatchProperties;
+import org.springframework.stereotype.Component;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Component
+public class MessageProxy {
+
+    @Autowired
+    private BatchProperties props;
+
+    /**
+    * Get all messages
+    * @return An iterable of all messages
+    */
+
+    public Iterable<Employee> getEmployees() {
+        String baseApiUrl = props.getApiUrl();
+        String getEmployeesUrl = baseApiUrl + "/employees";
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Iterable<Employee>> response = restTemplate.exchange(
+                getEmployeesUrl,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<Iterable<Employee>>() {}
+                );
+
+        log.debug("Get Employees call " + response.getStatusCode().toString());
+        
+        return response.getBody();
+    }
+
+}

@@ -1,0 +1,20 @@
+package com.Rental_Project.models;
+
+import lombok.Data;
+import javax.persistence.Table;
+import javax.persistence.Entity;
+@Data
+@Entity
+@Table(name = "rentals")
+public class Rentals {
+id 
+name
+surface
+price
+picture
+description
+owener_id
+created_at
+updated_at
+
+}

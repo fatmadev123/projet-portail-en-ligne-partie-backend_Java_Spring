@@ -1,0 +1,12 @@
+package com.Rental_Project.models;
+
+import lombok.Data;
+import javax.persistence.Table;
+import javax.persistence.Entity;
+
+@Data
+@Entity
+@Table(name = "messages")
+public class Messages {
+
+}

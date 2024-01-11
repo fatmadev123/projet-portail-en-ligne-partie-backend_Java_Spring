@@ -1,0 +1,5 @@
+package com.Rental_Project.controller;
+
+public class MessagesController {
+
+}
