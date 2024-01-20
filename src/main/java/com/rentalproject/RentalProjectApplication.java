@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
+
 @SpringBootApplication()
 public class RentalProjectApplication {
 
@@ -11,9 +12,4 @@ public class RentalProjectApplication {
 		SpringApplication.run(RentalProjectApplication.class, args);
 	}
 	
-    
-    public void run(String... args) throws Exception {
-        System.out.println("Hello World!");
-    }
-
 }

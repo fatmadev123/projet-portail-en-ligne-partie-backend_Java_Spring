@@ -1,7 +1,0 @@
-package com.rentalproject.controller;
-
-import org.springframework.web.bind.annotation.PostMapping;
-
-public class RegisterController {
-	
-}

@@ -1,9 +1,0 @@
-package com.rentalproject.repository;
-
-import org.springframework.data.repository.CrudRepository;
-
-import com.rentalproject.models.Messages;
-
-public interface MessageRepository extends CrudRepository<Messages, Long>  {
-
-}

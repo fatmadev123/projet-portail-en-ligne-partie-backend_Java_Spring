@@ -9,8 +9,12 @@ import com.rentalproject.models.Rentals;
 import com.rentalproject.repository.RentalsRepository;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
+@Getter
+@Setter
 @Service
 public class RentalsServices  {
     @Autowired
@@ -28,21 +32,6 @@ public class RentalsServices  {
     	rentalRepository.deleteById(id);
     }
     
-    public void updateRental(final Long id, Rentals Rentals) {
-    	Optional<Rentals> rent = rentalRepository.findById(id);
-    	  if (rent.isPresent()) {
-              Rentals rt = rent.get();
-              rt.setName(Rentals.getName());
-              rt.setSurface(Rentals.getSurface());
-              rt.setPicture(Rentals.getPicture());
-              rt.setPrice(Rentals.getPrice());
-             
-              rentalRepository.save(rt);
-          }
-    }
-    
-    
-
     public Rentals saveRental(Rentals rental) {
         Rentals savedRental = rentalRepository.save(rental);
         return savedRental;

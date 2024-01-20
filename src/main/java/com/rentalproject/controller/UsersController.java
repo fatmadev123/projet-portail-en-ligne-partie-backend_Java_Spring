@@ -14,11 +14,9 @@ import com.rentalproject.services.UsersServices;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class UsersController {
-	
 	@Autowired
     private UsersServices userService;
 	
-	 
 	    @GetMapping("/users")
 	    public Iterable<Users> getUsers() {
 	        return userService.getUsers();

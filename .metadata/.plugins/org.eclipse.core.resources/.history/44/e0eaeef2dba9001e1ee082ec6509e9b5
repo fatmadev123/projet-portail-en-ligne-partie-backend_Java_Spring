@@ -1,9 +1,0 @@
-package com.Rental_Project.models;
-
-
-@Data
-@Entity
-@Table(name = "users")
-public class Users {
-
-}

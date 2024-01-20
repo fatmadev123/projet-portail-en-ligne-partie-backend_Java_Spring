@@ -9,8 +9,12 @@ import com.rentalproject.models.Users;
 import com.rentalproject.repository.UsersRepository;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
+@Getter
+@Setter
 @Service
 public class UsersServices  {
     @Autowired
