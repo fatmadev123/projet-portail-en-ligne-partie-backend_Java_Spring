@@ -13,8 +13,10 @@ import com.rentalproject.models.Rentals;
 import com.rentalproject.repository.RentalsRepository;
 import com.rentalproject.services.RentalsServices;
 
+//import io.swagger.annotations.Api;
+//import io.swagger.annotations.ApiOperation;
 import jakarta.transaction.Transactional;
-
+//@Api("API pour les opérations CRUD sur les rentals.")
 @RestController
 public class RentalsController {
 	 @Autowired
@@ -26,7 +28,7 @@ public class RentalsController {
 	    public Iterable<Rentals> getRentals() {
 	        return rentalService.getRentals();
 	    }
-	    
+	    //@ApiOperation(value = "Récupère un rental grâce à son ID à condition que celui-ci soit enregistré en BD!")
 	    @PutMapping("/rentals/{id}")
 	    public Rentals replacerental(@RequestBody Rentals newRental, @PathVariable Long id) {
 	      
