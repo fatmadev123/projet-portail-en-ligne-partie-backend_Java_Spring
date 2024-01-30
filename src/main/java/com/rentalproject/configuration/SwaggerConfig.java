@@ -1,29 +1,36 @@
 
-  package com.rentalproject.configuration; import
-  org.springframework.context.annotation.Bean; import
-  org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+  package com.rentalproject.configuration; 
+  import io.swagger.v3.oas.models.Components;
+  import io.swagger.v3.oas.models.OpenAPI;
+  import io.swagger.v3.oas.models.security.SecurityScheme;
+  import org.springframework.context.annotation.Bean;
+  import org.springframework.context.annotation.Configuration;
 
-import
-  springfox.documentation.builders.PathSelectors; import
-  springfox.documentation.builders.RequestHandlerSelectors; import
-  springfox.documentation.spi.DocumentationType; import
-  springfox.documentation.spring.web.plugins.Docket; import
-  springfox.documentation.swagger2.annotations.EnableSwagger2;
-  
+  /**
+   * Configuration class for Swagger documentation.
+   */
   @Configuration
-  
-  //@EnableSwagger2 
-  @EnableWebMvc
   public class SwaggerConfig {
-  
-  @Bean 
-  public Docket api() { 
-	  return new Docket(DocumentationType.SWAGGER_2)
-			  .select()
-  //.apis(RequestHandlerSelectors.basePackage("com.rentalproject.web"))
-  .apis(RequestHandlerSelectors.any())
-  //.paths(PathSelectors.regex("/rentals.*")) .paths(PathSelectors.any())
-  .paths(PathSelectors.any())
-  .build(); } }
+
+      /**
+       * Configures the OpenAPI settings for Swagger.
+       *
+       * @return An instance of {@link OpenAPI} containing the custom configuration.
+       */
+      @Bean
+      public OpenAPI customOpenAPI() {
+          return new OpenAPI()
+                  .components(
+                          new Components()
+                                  .addSecuritySchemes(
+                                          "bearer-key",
+                                          new SecurityScheme()
+                                                  .type(SecurityScheme.Type.HTTP)
+                                                  .scheme("bearer")
+                                                  .bearerFormat("JWT")
+                                  )
+                  );
+      }
+  }
+
  

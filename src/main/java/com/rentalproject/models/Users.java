@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import jakarta.persistence.Table;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
@@ -22,14 +22,9 @@ public class Users {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	@Column(name="email") private String email;
-	
 	@Column(name="name") private String name;
-	
 	@Column(name="password") private String password;
-	
-	@Column(name="created_at") private Date createdAt;
-	
-	@Column(name="updated_at") private Date updatedAt;
+	@Column(name="created_at") private LocalDateTime createdAt;
+	@Column(name="updated_at") private LocalDateTime updatedAt;
 }
