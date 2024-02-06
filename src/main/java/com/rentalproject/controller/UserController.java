@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rentalproject.dto.UserDto;
-import com.rentalproject.models.Users;
+import com.rentalproject.models.User;
 import com.rentalproject.services.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,10 +22,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-
 	@Autowired
 	private UserService userService;
-	
 	@Autowired
 	private ModelMapper modelMapper;
 	
@@ -35,8 +33,7 @@ public class UserController {
 	@ApiResponse(responseCode = "503", description = "Service unavailable")
 	@GetMapping("/{id}")
 	public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
-		Optional<Users> user;
-
+		Optional<User> user;
 		try {
 			user = userService.getUserById(id);
 		} catch (IllegalArgumentException ex) {
@@ -49,7 +46,6 @@ public class UserController {
 		if (user.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-
 		userDto = modelMapper.map(user, UserDto.class);
 		return ResponseEntity.status(HttpStatus.OK).body(userDto);
 	}

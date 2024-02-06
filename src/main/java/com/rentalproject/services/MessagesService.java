@@ -1,7 +1,7 @@
 package com.rentalproject.services;
 
-import com.rentalproject.models.Messages;
+import com.rentalproject.models.Message;
 
 public interface MessagesService {
-	void createMessage(Messages message);
+	void createMessage(Message message);
 }

@@ -2,19 +2,18 @@ package com.rentalproject.models;
 
 import lombok.Data;
 import jakarta.persistence.Table;
-
 import java.time.LocalDateTime;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Entity;
 @Data
 @Entity
 @Table(name = "rentals")
-public class Rentals {
+public class Rental {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
 	@Column(name="name")private String name;
@@ -22,15 +21,17 @@ public class Rentals {
 	@Column(name="price") private Float price;
 	@Column(name="picture") private String picture;
 	@Column(name="description")private String description;
-	@Column(name="owener_id") private Long owenerId;
+	@JoinColumn(name="owner_id", nullable = false)
+	@ManyToOne()
+	private User user;
 	@Column(name="created_at") private LocalDateTime createdAt;
 	@Column(name="updated_at") private LocalDateTime updatedAt;
 	
-	public Rentals() {
+	public Rental() {
 		super();
 	}
 	
-	public Rentals(Long id, String name, Float surface, Float price, String description) {
+	public Rental(Long id, String name, Float surface, Float price, String description) {
 		super();
 		this.id = id;
 		this.name = name;

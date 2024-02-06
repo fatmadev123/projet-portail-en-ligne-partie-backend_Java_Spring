@@ -21,7 +21,7 @@ import org.webjars.NotFoundException;
 import com.rentalproject.dto.RentalDto;
 import com.rentalproject.dto.RentalsResponse;
 import com.rentalproject.dto.RentalResponse;
-import com.rentalproject.models.Rentals;
+import com.rentalproject.models.Rental;
 import com.rentalproject.services.AuthService;
 import com.rentalproject.services.RentalsService;
 
@@ -31,13 +31,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 @RestController
 @RequestMapping("/api/rentals")
 public class RentalsController {
-
 	@Autowired
 	private RentalsService rentalsService;
-
 	@Autowired
 	private AuthService authService;
-
 	@Autowired
 	private ModelMapper modelMapper;
 
@@ -46,8 +43,7 @@ public class RentalsController {
 	@ApiResponse(responseCode = "200", description = "Rentals loaded")
 	@ApiResponse(responseCode = "503", description = "Service unavailable")
 	public ResponseEntity<RentalsResponse> getRentals() {
-
-		List<Rentals> rentals;
+		List<Rental> rentals;
 		try {
 			rentals = rentalsService.getRentals();
 		} catch (Exception ex) {
@@ -56,12 +52,11 @@ public class RentalsController {
 		RentalsResponse rentalsResponse = new RentalsResponse();
 		List<RentalDto> rentalsDto = new ArrayList<RentalDto>();
 
-		for (Rentals r : rentals) {
+		for (Rental r : rentals) {
 			RentalDto rentalDto = modelMapper.map(r, RentalDto.class);
 			rentalsDto.add(rentalDto);
 		}
 		rentalsResponse.setRentals(rentalsDto);
-
 		return ResponseEntity.status(HttpStatus.OK).body(rentalsResponse);
 	}
 
@@ -72,8 +67,7 @@ public class RentalsController {
 	@ApiResponse(responseCode = "404", description = "Rental not found")
 	@ApiResponse(responseCode = "503", description = "Service unavailable")
 	public ResponseEntity<RentalDto> getRentalById(@PathVariable Long id) {
-		Optional<Rentals> rental;
-
+		Optional<Rental> rental;
 		try {
 			rental = rentalsService.getRentalById(id);
 		} catch (IllegalArgumentException ex) {
@@ -86,12 +80,11 @@ public class RentalsController {
 		if (rental.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-
 		rentalDto = modelMapper.map(rental, RentalDto.class);
 		return ResponseEntity.status(HttpStatus.OK).body(rentalDto);
 	}
 
-	@PostMapping("")
+	@PostMapping("/")
 	@Operation(security = { @SecurityRequirement(name = "bearer-key") }, summary = "Creates a new rental")
 	@ApiResponse(responseCode = "200", description = "Rental created")
 	@ApiResponse(responseCode = "400", description = "Invalid input or invalid file")
@@ -99,25 +92,22 @@ public class RentalsController {
 	public ResponseEntity<RentalResponse> createRental(@RequestParam("name") String name, @RequestParam("surface") float surface,
 			@RequestParam("price") float price, @RequestParam("picture") String picture,
 			@RequestParam("description") String description) {
-
-		Rentals createdRental = new Rentals();
+		Rental createdRental = new Rental();
 		try {
 			createdRental.setName(name);
 			createdRental.setSurface(surface);
 			createdRental.setPrice(price);
 			createdRental.setDescription(description);
 			createdRental.setPicture(picture);
-            authService.getMe().ifPresent(me -> createdRental.setOwenerId(me.getId()));
+			authService.getMe().ifPresent(me -> createdRental.setUser(me));
             rentalsService.createRental(createdRental);
 		} catch (IllegalArgumentException ex) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} catch (Exception ex) {
 			return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
 		}
-
 		RentalResponse rentalResponse = new RentalResponse();
 		rentalResponse.setMessage("Rental created");
-
 		return ResponseEntity.status(HttpStatus.OK).body(rentalResponse);
 	}
 
@@ -130,19 +120,16 @@ public class RentalsController {
 	public ResponseEntity<RentalResponse> updateRental(@PathVariable Long id, @RequestParam("name") String name,
 			@RequestParam("surface") float surface, @RequestParam("price") float price,
 			@RequestParam("description") String description) {
-		Rentals updatedRental = new Rentals(id, name, surface, price, description);
+		Rental updatedRental = new Rental(id, name, surface, price, description);
 		try {
 			rentalsService.updateRental(id, updatedRental);
 		} catch (NotFoundException ex) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
 		} catch (IllegalArgumentException ex) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
 		} catch (Exception ex) {
 			return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
 		}
-
 		RentalResponse rentalResponse = new RentalResponse();
 		rentalResponse.setMessage("Rental updated!");
 		return ResponseEntity.status(HttpStatus.OK).body(rentalResponse);

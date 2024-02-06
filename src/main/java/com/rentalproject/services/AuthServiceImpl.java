@@ -2,7 +2,7 @@ package com.rentalproject.services;
 
 import com.rentalproject.dto.LoginRequest;
 import com.rentalproject.dto.RegisterRequest;
-import com.rentalproject.models.Users;
+import com.rentalproject.models.User;
 import com.rentalproject.repository.UsersRepository;
 import com.rentalproject.security.JwtTokenProvider;
 
@@ -28,10 +28,8 @@ public class AuthServiceImpl implements AuthService {
 	private UsersRepository userRepository;
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
-
 	@Autowired
 	private ModelMapper modelMapper;
-
 	@Autowired
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -62,7 +60,7 @@ public class AuthServiceImpl implements AuthService {
 			throw new IllegalArgumentException("Email already exists");
 		}
 
-		Users user = modelMapper.map(registerRequest, Users.class);
+		User user = modelMapper.map(registerRequest, User.class);
 		user.setPassword(bCryptPasswordEncoder().encode(user.getPassword()));
 		user.setCreatedAt(LocalDateTime.now());
 		user.setUpdatedAt(LocalDateTime.now());
@@ -74,10 +72,10 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public Optional<Users> getMe() {
+	public Optional<User> getMe() {
 		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 
-		Optional<Users> user = userRepository.findByEmail(name);
+		Optional<User> user = userRepository.findByEmail(name);
 
 		if (user.isPresent()) {
 			return user;

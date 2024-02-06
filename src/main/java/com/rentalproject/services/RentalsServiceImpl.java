@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
-import com.rentalproject.models.Rentals;
+import com.rentalproject.models.Rental;
 import com.rentalproject.repository.RentalsRepository;
 
 @Service
@@ -19,18 +19,18 @@ public class RentalsServiceImpl implements RentalsService {
     private RentalsRepository rentalRepository;
 
     @Override
-    public List<Rentals> getRentals() {
-        return (List<Rentals>) rentalRepository.findAll();
+    public List<Rental> getRentals() {
+        return (List<Rental>) rentalRepository.findAll();
     }
 
     @Override
-    public Optional<Rentals> getRentalById(Long id) {
+    public Optional<Rental> getRentalById(Long id) {
 
         if (Double.isNaN(id) || id < 0) {
             throw new IllegalArgumentException("Invalid value for id");
         }
 
-        Optional<Rentals> rental = rentalRepository.findById(id);
+        Optional<Rental> rental = rentalRepository.findById(id);
 
         if (rental.isPresent()) {
             return rental;
@@ -40,19 +40,19 @@ public class RentalsServiceImpl implements RentalsService {
     }
 
     @Override
-    public void createRental(Rentals createdRental) {
+    public void createRental(Rental createdRental) {
         createdRental.setCreatedAt(LocalDateTime.now());
         rentalRepository.save(createdRental);
     }
 
     @Override
-    public void updateRental(Long id, Rentals updatedRental) {
+    public void updateRental(Long id, Rental updatedRental) {
 
         if (updatedRental.getName().isBlank() || updatedRental.getSurface().isNaN() || updatedRental.getPrice().isNaN() || updatedRental.getDescription().isBlank()) {
             throw new IllegalArgumentException("Invalid input for update!");
         }
 
-        Rentals rentalToUpdate = rentalRepository.findById(id).orElse(null);
+        Rental rentalToUpdate = rentalRepository.findById(id).orElse(null);
 
         if (rentalToUpdate == null) {
             throw new NotFoundException("Rental not found!");
@@ -75,4 +75,5 @@ public class RentalsServiceImpl implements RentalsService {
 
         rentalRepository.save(rentalToUpdate);
     }
+
 }

@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import com.rentalproject.models.Users;
+import com.rentalproject.models.User;
 import com.rentalproject.repository.UsersRepository;
 
 @Service
@@ -21,7 +21,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Users user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User does not exist by Username or Email"));;
+		User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User does not exist by Username or Email"));;
 		if(user == null) {
 			throw new UsernameNotFoundException("User not found", null);
 		}

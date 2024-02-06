@@ -4,9 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import jakarta.persistence.Table;
-
 import java.time.LocalDateTime;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,7 +16,7 @@ import jakarta.persistence.Entity;
 @Setter
 @Entity
 @Table(name = "users")
-public class Users {
+public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -28,3 +26,4 @@ public class Users {
 	@Column(name="created_at") private LocalDateTime createdAt;
 	@Column(name="updated_at") private LocalDateTime updatedAt;
 }
+
