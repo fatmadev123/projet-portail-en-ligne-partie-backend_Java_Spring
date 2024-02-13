@@ -1,6 +1,9 @@
 package com.rentalproject.dto;
 
 import java.time.LocalDateTime;
+
+import com.rentalproject.models.User;
+
 import lombok.Data;
 
 @Data
@@ -11,8 +14,8 @@ public class RentalDto {
 	private Float price;
 	private String picture;
 	private String description;
-	private Long owner_id;
-	private LocalDateTime created_at;
-	private LocalDateTime updated_at;
+	private User user;
+	private LocalDateTime createdAt;
+	private LocalDateTime updatedAt;
 }
 

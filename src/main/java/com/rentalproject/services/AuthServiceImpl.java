@@ -47,7 +47,8 @@ public class AuthServiceImpl implements AuthService {
 		}
 		return authenticate(loginRequest);
 	}
-
+	
+//methode qui permet d'enregister un nouveau utilisateur
 	@Override
 	public String register(RegisterRequest registerRequest) {
 
@@ -70,7 +71,8 @@ public class AuthServiceImpl implements AuthService {
 		LoginRequest loginRequest = new LoginRequest(registerRequest.getEmail(), registerRequest.getPassword());
 		return authenticate(loginRequest);
 	}
-
+	
+//methode permet de renvoyer l'utilisateur actuellement connecté
 	@Override
 	public Optional<User> getMe() {
 		String name = SecurityContextHolder.getContext().getAuthentication().getName();

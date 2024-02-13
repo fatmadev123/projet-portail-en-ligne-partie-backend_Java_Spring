@@ -19,19 +19,19 @@ Partie back_end pour le projet portail en ligne pour permettre aux locataires po
 
 ## Partie Back-end de projet :
 
-- Cloner le projet suivant: https://github.com/fquyont/Project3-ChatopAPI.git
+- Cloner le projet suivant: https://github.com/OpenClassrooms-Student-Center/Developpez-le-back-end-en-utilisant-Java-et-Spring.git
 - Remplir le fichier application.properties par les informations suivantes : spring.datasource.url=jdbc:mysql://localhost:PORT/SCHEMA par le remplacement de PORT et SCHEMA par le port SQL et le schema utilisé dans le base de données, et insérer les informations suivantes spring.datasource.username= et spring.datasource.password= par leurs valeur.
 - Générer et copier dans app.jwt-secret= un mot de passe aléatoire de 64 caractères hexadécimaux.
 
 ## Partie Front-end de projet :
 
-- Cloner le projet suivant : https://github.com/OpenClassrooms-Student-Center/Developpez-le-back-end-en-utilisant- Java-et-Spring.git
+- Cloner le projet suivant : git clone https://github.com/OpenClassrooms-Student-Center/P3-Full-Stack-portail-locataire
 - Se positionner dans le dossier de projet et ouvrir un console et taper l’instruction suivante : npm install
 - Tester le partie front_end en utilisant le serveur fictif Mockoon en utilisant le fichier Json qui se trouve dans le lien suivant :https://github.com/OpenClassrooms-Student-Center/Developpez-le-back-end-en-utilisant-Java-et-Spring/blob/main/ressources/mockoon/rental-oc.json
 
 ## Structure de projet :
 
-- Controllers : Contrôleurs des APIs
+- Controlleur : Contrôleurs des APIs
 - Model: Modèles pour communiquer avec le DB
 - Service : Traitement des données reçues
 - Repository : Les classes qui interagissent avec le DB

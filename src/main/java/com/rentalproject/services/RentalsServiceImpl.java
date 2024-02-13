@@ -17,12 +17,12 @@ public class RentalsServiceImpl implements RentalsService {
 
     @Autowired
     private RentalsRepository rentalRepository;
-
+//methode qui permet de renvoyer la liste des rentals
     @Override
     public List<Rental> getRentals() {
         return (List<Rental>) rentalRepository.findAll();
     }
-
+//trouver un rental par Id
     @Override
     public Optional<Rental> getRentalById(Long id) {
 
@@ -38,13 +38,13 @@ public class RentalsServiceImpl implements RentalsService {
 
         return null;
     }
-
+//creer ou enregistrer un nouveau rental
     @Override
     public void createRental(Rental createdRental) {
         createdRental.setCreatedAt(LocalDateTime.now());
         rentalRepository.save(createdRental);
     }
-
+//modifier un rental
     @Override
     public void updateRental(Long id, Rental updatedRental) {
 

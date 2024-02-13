@@ -13,11 +13,10 @@ public class MessagesServiceImpl implements MessagesService {
 
 	@Autowired
 	private MessageRepository messageRepository;
-
+//enregistrement d'un message
 	public void createMessage(Message message) {
 		message.setCreatedAt(LocalDateTime.now());
 		message.setUpdatedAt(LocalDateTime.now());
-
 		messageRepository.save(message);
 	}
 }
